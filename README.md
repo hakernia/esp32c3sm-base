@@ -1,4 +1,4 @@
-This is a base library for client and server built on noname ESP32C3 Super Micro boards.
+These are base projects for client and server built on noname ESP32C3 Super Micro boards.
 
 To build properly create your own secrets_local.h, based on secrets_example.h included in the repo.
 You may want to add it to each subprojects' directory or to common library like SharedSecrets etc.
