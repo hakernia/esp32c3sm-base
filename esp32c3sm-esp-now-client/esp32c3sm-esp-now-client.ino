@@ -213,8 +213,8 @@ void enter_light_sleep() {
     // 2. Configure Wake-up Sources
     
     // Enable Timer Wake-up
-    esp_sleep_enable_timer_wakeup(SLEEP_TIMEOUT_US);
-    Serial.printf("Timer wakeup set for %llu uS.\n", SLEEP_TIMEOUT_US);
+    // esp_sleep_enable_timer_wakeup(SLEEP_TIMEOUT_US);
+    // Serial.printf("Timer wakeup set for %llu uS.\n", SLEEP_TIMEOUT_US);
 
     // Enable GPIO Wake-up for all 4 buttons (LOW level on press)
     // Note: The ESP32-C3 in Light Sleep can use gpio_wakeup_enable() for any GPIO.
@@ -240,15 +240,10 @@ void enter_light_sleep() {
     // The setup() function handles the rest after wake-up (re-init Wi-Fi, check buttons, send data).
     // In Arduino, when waking from Light Sleep, the code continues from esp_light_sleep_start().
     // We can jump back to setup() or handle re-initialization here.
-    // For simplicity, we'll let the loop run again, which will call enter_light_sleep() again
-    // if the logic doesn't trigger a message send (which is handled in setup in this design).
     
     // We *must* re-initialize Wi-Fi/ESP-NOW/Serial to be able to communicate again.
-    // Re-initialization is often easier by just letting the loop finish and the code to proceed,
-    // but with the current structure which places the logic in `setup()`, 
-    // the cleanest way to restart the cycle is to force a soft-reset or re-run setup logic.
-    // Since Light Sleep preserves RAM, we'll manually re-run the essential setup steps.
     
+/*
     // Re-initialize WiFi/ESP-NOW environment (it was turned off before sleep)
     WiFi.mode(WIFI_STA);
     esp_now_init();
@@ -265,6 +260,7 @@ void enter_light_sleep() {
         peerInfo.encrypt = false;
         esp_now_add_peer(&peerInfo);
     }
+*/
 
     // Now, run the setup logic again to check the wake-up reason and send a message.
     setup(); 
