@@ -6,6 +6,7 @@ You may want to add it to each subprojects' directory or to common library like 
 Client
 The client is in active state by default.
 It sends simple messages based on changing states of GPIO 1-4
+GPIOs are debounced. Feel free to experiment with bare wire.
 It enters sleep mode on Server's request.
 Exit from sleep mode by changing GPIO 1-4 or by timer (commented out).
 
